@@ -1,55 +1,55 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    date: '',
-    time: '',
-    guests: ''
-  })
+    name: "",
+    date: "",
+    time: "",
+    guests: "",
+  });
 
-  const [errors, setErrors] = useState({})
-  const navigate = useNavigate()
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validate = () => {
-    const newErrors = {}
-    const today = new Date().toISOString().split('T')[0]
+    const newErrors = {};
+    const today = new Date().toISOString().split("T")[0];
 
     if (!formData.name || formData.name.length < 3) {
-      newErrors.name = 'El nombre debe tener al menos 3 caracteres.'
+      newErrors.name = "El nombre debe tener al menos 3 caracteres.";
     }
 
     if (!formData.date || formData.date < today) {
-      newErrors.date = 'La fecha no puede ser anterior a hoy.'
+      newErrors.date = "La fecha no puede ser anterior a hoy.";
     }
 
-    if (!formData.time || formData.time < '10:00' || formData.time > '22:00') {
-      newErrors.time = 'La hora debe estar entre 10:00 y 22:00.'
+    if (!formData.time || formData.time < "10:00" || formData.time > "22:00") {
+      newErrors.time = "La hora debe estar entre 10:00 y 22:00.";
     }
 
-    const guests = parseInt(formData.guests)
+    const guests = parseInt(formData.guests);
     if (!guests || guests < 1 || guests > 20) {
-      newErrors.guests = 'Debe ser un número entre 1 y 20.'
+      newErrors.guests = "Debe ser un número entre 1 y 20.";
     }
 
-    return newErrors
-  }
+    return newErrors;
+  };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const validationErrors = validate()
-    setErrors(validationErrors)
+    e.preventDefault();
+    const validationErrors = validate();
+    setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      localStorage.setItem('reservation', JSON.stringify(formData))
-      navigate('/')
+      localStorage.setItem("reservation", JSON.stringify(formData));
+      navigate("/");
     }
-  }
+  };
 
   return (
     <div style={styles.container}>
@@ -103,53 +103,55 @@ const Reserve = () => {
           {errors.guests && <p style={styles.error}>{errors.guests}</p>}
         </div>
 
-        <button type="submit" style={styles.button}>Reservar</button>
+        <button type="submit" style={styles.button}>
+          Reservar
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 const styles = {
   container: {
-    maxWidth: '500px',
-    margin: '40px auto',
-    padding: '20px',
-    backgroundColor: '#f7f7f7',
-    borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+    maxWidth: "500px",
+    margin: "40px auto",
+    padding: "20px",
+    backgroundColor: "#f7f7f7",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
   },
   heading: {
-    textAlign: 'center',
-    marginBottom: '20px'
+    textAlign: "center",
+    marginBottom: "20px",
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px'
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
   },
   field: {
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column",
   },
   input: {
-    padding: '8px',
-    borderRadius: '4px',
-    border: '1px solid #ccc'
+    padding: "8px",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
   },
   error: {
-    color: 'red',
-    fontSize: '0.85rem',
-    marginTop: '4px'
+    color: "red",
+    fontSize: "0.85rem",
+    marginTop: "4px",
   },
   button: {
-    padding: '10px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    fontWeight: 'bold',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer'
-  }
-}
+    padding: "10px",
+    backgroundColor: "#007bff",
+    color: "white",
+    fontWeight: "bold",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
 
-export default Reserve
+export default Reserve;
