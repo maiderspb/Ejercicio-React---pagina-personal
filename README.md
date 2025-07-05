@@ -2,7 +2,7 @@
 
 ## 🧠 Introducción
 
-React es una biblioteca de JavaScript creada por Facebook que facilita la construcción de interfaces de usuario interactivas. 
+React es una biblioteca de JavaScript creada por Facebook que facilita la construcción de interfaces de usuario interactivas.
 
 Es una herramienta de código abierto muy utilizada en el desarrollo de aplicaciones web modernas gracias a su eficiencia, flexibilidad y componentes reutilizables.
 
